@@ -1,0 +1,78 @@
+{% extends 'looks/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/look5.css" />
+{% endblock %}
+
+{% block docreadyjs %}
+$('#color_drop_down').val('{{color}}');
+{% endblock %}
+
+{% block inlinejs %}
+function jumpto(x){
+
+if (document.form1.jumpmenu.value != "null") {
+document.location.href = "/looks/" + x
+}
+}
+{% endblock %}
+
+{% block content %}
+<div>
+</div>
+<div>
+	<form name="form1">
+		{% csrf_token %}
+		<select id="color_drop_down" name="jumpmenu" onChange="jumpto(document.form1.jumpmenu.options[document.form1.jumpmenu.options.selectedIndex].value)">
+			<option>Jump to...</option>
+			<option value="r">Red</option>
+			<option value="rp">Red-Purple</option>
+			<option value="p">Purple</option>
+			<option value="pb">Purple-Blue</option>
+			<option value="b">Blue</option>
+			<option value="bg">Blue-Green</option>
+			<option value="g">Green</option>
+			<option value="gy">Green-Yellow</option>
+			<option value="y">Yellow</option>
+			<option value="yr">Yellow-Red</option>
+		</select>
+	</form>
+
+</div>
+<div class="index_looks">
+{% if looks.0 %}
+	<div class="index_left">
+		<a href="{% url look_detail looks.0.id %}">
+		<div class="index_biglook_img" style="background: url('{{ looks.0.look_photo.url }}') no-repeat">
+			<div class="index_biglook_banner">
+				<div class="opacity"></div>
+				<div class="banner_content">
+					<div>{{ looks.0.look_short_desc }}</div><div class="float_right small">{{ looks.0.look_photo_upload_datetime }}</div>
+				</div>
+			</div>
+		</div>
+		</a>
+	</div>
+	<div class="index_right">
+		<div class="index_smalllooks">
+{% endif %}
+{% for look in looks %}
+			<div class="index_smalllook">
+				<a href="{% url look_detail look.id %}">
+				<div class="index_smalllook_img"  style="background: url('{{ look.look_photo.url }}') no-repeat">
+				</div>
+				<div class="index_smalllook_footer">
+					<div>{{ look.look_short_desc }}</div><div class="float_right small black">{{ look.look_photo_upload_datetime }}</div>
+				</div>
+				</a>
+			</div>
+{% empty %}
+<div class="index_look">
+	There is no looks.
+</div>
+{% endfor %}
+		</div>
+	</div>
+	
+</div>
+{% endblock %}

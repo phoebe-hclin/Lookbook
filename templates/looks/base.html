@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>LOOKIES ::Find your looks::</title>
+		<link rel="stylesheet" href="{{STATIC_URL}}css/themes/base/jquery.ui.all.css">
+		<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/look.css" />
+		{% block css %}{% endblock %}
+		<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/external/jquery.bgiframe-2.1.2.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.core.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.widget.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.mouse.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.button.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.draggable.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.position.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.resizable.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.ui.dialog.js"></script>
+		<script type="text/javascript" src="{{STATIC_URL}}js/ui/jquery.effects.core.js"></script>
+		{% block js %}{% endblock %}
+		<script type="text/javascript">
+			//<![CDATA[
+			{# Override this block to add functions to bind on document ready. #}
+			$(document).ready(function() {
+			    {% block docreadyjs %}{% endblock %}
+			});
+			{# Override this block to add inline js #}
+			{% block inlinejs %}{% endblock %}
+			//]]>
+		</script>
+
+	</head>
+	<body>
+		<div class="main text_center div_center">
+			<div class="navigation text_right"><a href="/looks/upload/">Upload</a></div>
+			<div class="header text_center div_center"><a href="/looks/">LOOK BOOK</a></div>
+			<div class="content">
+				{% block content %}{% endblock %}
+			</div>
+			<div class="footer text_center div_center">2012 &copy; Lookies.com</div>
+		</div>
+	</body>
+</html>

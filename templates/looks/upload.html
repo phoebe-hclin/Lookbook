@@ -1,0 +1,30 @@
+{% extends 'looks/base.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data" action='.'>
+	{% csrf_token %} 
+	<table class="table_center">
+		<tr>
+			<td class="table_label">Upload a look photo</td>
+		</tr>
+		<tr>
+			<td><input type="file" name="look_photo" value="" /></td>
+		</tr>
+		<tr>
+			<td>{{ form.look_photo_path.errors }}</td>
+		</tr>
+		<tr>
+			<td class="table_label">Description</td>
+		</tr>
+		<tr>
+			<td><textarea name="look_description" cols="50" rows="10"></textarea></td>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+		<tr class="text_center">
+			<td><input type="submit" value="Upload" /></td>
+		</tr>
+	</table>
+</form>
+{% endblock %}

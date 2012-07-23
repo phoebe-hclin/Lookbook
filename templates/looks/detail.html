@@ -1,0 +1,101 @@
+{% extends 'looks/base.html' %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/popupform.css" />
+{% endblock%}
+
+{% block js %}
+<script type="text/javascript" src="{{STATIC_URL}}js/popupform.js"></script>
+{% endblock%}
+
+{% block docreadyjs %}
+	$("#canvas").css('background-image', 'url({{ look.look_photo.url }})');
+	$(".detail_look").css('width', {{look.look_photo.width}} + 'px');
+	var canvas = $("#canvas")[0];
+	var context = canvas.getContext('2d');
+	{% for item in items %}
+		context.fillStyle = 'red';
+		context.font="16px Arial"
+		context.fillText("{{item.product_brand}}", {{item.x_position_on_look}}+5, {{item.y_position_on_look}}-5);
+		context.fillRect({{item.x_position_on_look}}, {{item.y_position_on_look}}, 5, 5);
+	{% endfor %}
+
+{% endblock %}
+
+{% block content %}
+<div class="detail_look">
+	<div class="detail_photo">
+		<div class="add_tag">
+			<button id="add_tag" ></button>
+		</div>
+		<div class="done_tag hidden">
+			<button id="done_tag"></button>
+		</div>
+		<!--<img id="detail_img" src="{{ look.look_photo.url }}" alt="photo" width="{{look.look_photo.width}}" />-->
+		<canvas id="canvas" width="{{look.look_photo.width}}" height="{{look.look_photo.height}}"></canvas>
+		
+	</div>
+	<div id="item_tags" class="detail_items">
+		<ul>
+			{% for item in items %}
+			<li>{{item.get_product_brand_display}}&nbsp;|&nbsp;{{item.get_item_category_display}}&nbsp;|&nbsp;<a href="{{item.product_url}}" target="_new">{{item.product_name}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="detail_desc text_justify">
+		{{ look.look_description }}
+	</div>
+	<div class="footage">
+		{{ look.look_photo_upload_datetime }}
+	</div>
+</div>
+
+<div id="div_tag_form" name="div_tag_form">
+	<p class="validateTips">All fields are required.</p>
+	<form method="post" action='.' id="tag_form">
+		{% csrf_token %}
+		<table class="table_center">
+			<tr>
+				<td class="table_label"><label for="item_category">Category</label></td>
+				<td>
+					<select id="item_category" name="item_category">
+						<option value=""></option>
+						<option value="top">top</option>
+						<option value="bottom">bottom</option>
+						<option value="dress">dress</option>
+						<option value="bag">bag</option>
+						<option value="shoes">shoes</option>
+					</select>					
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="table_label"><label for="product_brand">Brand</label></td>
+				<td>
+					<select id="product_brand" name="product_brand">
+						<option value=""></option>
+						<option value="jcrew">J.Crew</option>
+						<option value="gap">GAP</option>
+						<option value="br">Banana Republic</option>
+						<option value="adidas">adidas</option>
+					</select>					
+				</td>
+				<td>{{ form.product_brand.errors }}</td>
+			</tr>
+			<tr>
+				<td class="table_label"><label for="product_name">Name</label></td>
+				<td><input type="" id="product_name" name="product_name" /></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="table_label"><label for="product_url">Product URL</label></td>
+				<td><textarea id="product_url" name="product_url"></textarea></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><input type="hidden" id="position" name="position" value="" /></td>
+			</tr>
+		</table>
+	</form>
+</div>
+{% endblock %}

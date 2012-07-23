@@ -1,0 +1,23 @@
+{% extends 'looks/base.html' %}
+
+{% block content %}
+{% for look in looks %}
+<div class="index_look">
+	<div class="index_photo">
+		<a href="{% url look_detail look.id %}">
+			<img src="{{ look.look_photo.url }}" alt="look photo" width="{% if look.look_photo.width > 300 %}300px{% else %}{{look.look_photo.width}}{% endif %}" />
+		</a>
+	</div>
+	<div class="index_desc">
+		{{ look.look_short_desc }}
+	</div>
+	<div class="footage text_right">
+		{{ look.look_photo_upload_datetime }}
+	</div>
+</div>
+{% empty %}
+<div class="index_look">
+	There is no looks.
+</div>
+{% endfor %}
+{% endblock %}

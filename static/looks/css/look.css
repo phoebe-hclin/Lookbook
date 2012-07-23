@@ -1,0 +1,119 @@
+body {
+	background-color: black;
+	color: white;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; 
+}
+.div_center {
+	margin: 0px auto;
+	width: 1000px;
+}
+.text_center {
+	text-align: center;	
+}
+.text_right {
+	text-align: right;
+}
+.text_justify {
+	text-align: justify;
+}
+.text_top {
+	vertical-align: top;
+}
+.main {
+	padding: 0px 20px;
+	border-left: 1px gray dashed;
+	border-right: 1px gray dashed;
+	background-color: #141414;
+	
+}
+.header {
+	font-size: 36pt;
+}
+.navigation a {
+	background-color: white;
+	border-radius: 5px;
+	padding: 2px 20px;
+	text-decoration: none;
+	color: black;
+	font-family: Impact, Charcoal, sans-serif;
+}
+.header a, add_tag a{
+	text-decoration: none;
+	color: white;
+}
+.footer {
+	color: gray;	
+}
+.content {
+	min-height: 550px;
+	margin: 20px 0px;
+	text-align: left;
+}
+
+.index_look {
+	display: inline-block;
+	width: 300px;
+	padding: 10px;
+	vertical-align: top;
+}
+.index_photo img{
+	display: block;
+	margin: 0px auto;
+}
+.index_desc {
+}
+.footage {
+	font-size: 9pt;
+	color: gray;
+}
+.detail_look {
+	margin: 0px auto;
+	display:block;
+}
+.detail_photo {
+	display:inline-block;
+	margin: 0px auto;
+	position: relative;
+}
+.detail_items {
+	display: block;
+	text-align: left;
+	font-size: 9pt;
+	color: #FCB3D1;
+}
+.detail_items a, .detail_items a:visited{
+	color: #FA75AB;
+}
+.detail_desc {
+}
+.add_tag, .done_tag {
+	position: absolute;
+	top: 0px;
+	right: -2px;
+}
+#add_tag, #done_tag {
+	width: 72px;
+	font-size: 8pt;
+}
+#canvas {
+	background-color: white;
+}
+.square {
+	position: absolute;
+	display:block;
+	border: 1px solid white;
+}
+
+.table_center {
+	margin: 0px auto;
+	width: 400px;
+}
+.table_label {
+	color: gray;
+}
+.tag_form {
+	
+}
+.hidden {
+	display: none;
+}

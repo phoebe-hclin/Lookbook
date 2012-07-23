@@ -1,0 +1,43 @@
+{% extends 'looks/base.html' %}
+{% load get_range %}
+
+{% block content %}
+{% for i in total|get_range %}
+{% ifequal i 0 %}
+<div class="index_looks">
+	<div class="index_left">
+		
+	</div>
+	<div class="index_right">
+		<div class="index_palettes ">
+			<a href="{% url look_detail looks.i.id %}">
+			<img src="{{ looks.i.look_photo.url }}" alt="look photo" height="450px" />
+			</a>
+		</div>
+		<div class="index_smalllooks">
+{% endifequal %}
+{% ifnotequal i 0 %}
+			<div class="index_smalllook">
+				<div class="index_smalllook_img">
+				<a href="{% url look_detail looks.i.id %}">
+				<img src="{{ looks.i.look_photo.url }}" alt="look photo" height="200px" />
+				</a>		
+				</div>
+				<div class="index_smalllook_banner">
+					<div>{{ looks.i.look_short_desc }}</div>
+					<div>{{ looks.i.look_photo_upload_datetime }}</div>
+				</div>
+			</div>
+{% endifnotequal %}
+{% ifequal i total %}
+		</div>
+	</div>
+{% endifequal %}
+	
+</div>
+{% empty %}
+<div class="index_look">
+	There is no looks.
+</div>
+{% endfor %}
+{% endblock %}
