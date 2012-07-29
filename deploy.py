@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, sys, shutil, getopt
+import os, sys, shutil, getopt, stat
 
 # Project dependent stuff
 DJANGO_APP_NAME = 'lookbook'
@@ -166,12 +166,19 @@ def deploy_debug():
 	deploy_django_settings()
 	
 
-# TODO: chmod lookbook/, media/, media/looks/, sqlite3.db
 def deploy_production():
 	print 'Deploying in PRODUCTION mode.'
 	deploy_django_settings()
 	deploy_django_wsgi()
 	deploy_httpconf()
+
+	# chmod 777 for lookbook/, media/, media/*
+	mode = stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR | stat.S_IRGRP | stat.S_IWGRP | stat.S_IXGRP | stat.S_IROTH | stat.S_IWOTH | stat.S_IXOTH
+	os.chmod(SOURCE_ROOT+'/'+DJANGO_APP_NAME, mode)
+	os.chmod(MEDIA_ROOT, mode)
+	for dirname in os.listdir(MEDIA_ROOT):
+		if dirname.find('.') == -1:
+			os.chmod(MEDIA_ROOT+'/'+dirname, mode)
 
 
 def usage():
