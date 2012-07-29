@@ -1,5 +1,8 @@
 # Django settings for Look project.
 
+PROJECT_ROOT = '/home/hainingwu/test/Lookbook/'
+URL_ROOT = 'http://ec2-107-22-22-8.compute-1.amazonaws.com/'
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -12,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/Users/phoebe/Documents/GitHub/HELLO-WORLD/lookbook/sqlite.db',
+        'NAME': PROJECT_ROOT + 'lookbook/sqlite.db',
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -45,22 +48,22 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/Users/phoebe/Documents/GitHub/HELLO-WORLD/media/'
+MEDIA_ROOT = PROJECT_ROOT + 'media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'http://127.0.0.1:8000/media/'
+MEDIA_URL = URL_ROOT + 'media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/Users/phoebe/Documents/GitHub/HELLO-WORLD/static/'
+STATIC_ROOT = PROJECT_ROOT + 'static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = PROJECT_ROOT + 'static/'
 
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
@@ -72,7 +75,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/Users/phoebe/Documents/GitHub/HELLO-WORLD/static/looks/",
+    PROJECT_ROOT + 'static/looks/',
 )
 
 # List of finder classes that know how to find static files in
@@ -108,7 +111,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/Users/phoebe/Documents/GitHub/HELLO-WORLD/templates"
+    PROJECT_ROOT + "templates/"
 )
 
 INSTALLED_APPS = (
