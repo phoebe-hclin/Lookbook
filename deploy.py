@@ -6,7 +6,9 @@ import os, sys, shutil, getopt, stat
 DJANGO_APP_NAME = 'lookbook'
 
 # System dependent stuff
-URL_ROOT = 'http://ec2-107-22-22-8.compute-1.amazonaws.com'
+URL_ROOT_PRODUCTION = 'http://ec2-107-22-22-8.compute-1.amazonaws.com'
+URL_ROOT_DEBUG = 'http://127.0.0.1:8000'
+URL_ROOT = URL_ROOT_DEBUG
 
 # Django project dependent stuff
 SOURCE_ROOT = os.getcwd()
@@ -24,7 +26,7 @@ DJANGO_SETTINGS_FILE = '/'.join([DJANGO_SETTINGS_LOCATION, DJANGO_SETTINGS_FILEN
 ########################################
 # Deploy Django settings.py
 ########################################
-def deploy_django_settings():
+def deploy_django_settings(debug):
 	tmpfile = DJANGO_SETTINGS_LOCATION + '/__' + DJANGO_SETTINGS_FILENAME
 
 	try:
@@ -48,6 +50,10 @@ def deploy_django_settings():
 			
 		settings_url_root = 'URL_ROOT = '
 		if line.find(settings_url_root) != -1:
+			if debug == True:
+				URL_ROOT = URL_ROOT_DEBUG
+			else:
+				URL_ROOT = URL_ROOT_PRODUCTION
 			line = line[:len(settings_url_root)] + '\'' + URL_ROOT + '/' + '\''
 
 		fout.write(line+'\n')
@@ -175,13 +181,13 @@ def set_file_permissions():
 
 def deploy_debug():
 	print 'Deploying in DEBUG mode.'
-	deploy_django_settings()
+	deploy_django_settings(debug=True)
 	set_file_permissions()
 
 
 def deploy_production():
 	print 'Deploying in PRODUCTION mode.'
-	deploy_django_settings()
+	deploy_django_settings(debug=False)
 	deploy_django_wsgi()
 	deploy_httpconf()
 	set_file_permissions()
